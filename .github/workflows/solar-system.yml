@@ -30,4 +30,8 @@ jobs:
               run: npm install
               
             - name: Unit Testing
-              run: npm test  
+              run: npm test 
+              
+    env_variable_job:
+        - run: echo "Environment Variable: ${{ vars.MONGO_USERNAME }}"
+        - run: echo "Secret Environment Variable: ${{ secrets.MONGO_PASSWORD }}"        
