@@ -1,0 +1,41 @@
+name: Solar System Workflow
+run-name: ${{ github.actor }} working on Solar System Workflows
+
+on:
+    workflow_dispatch: 
+    push:
+        branches: 
+            - main
+            - 'feature/*'
+
+env:
+  MONGO_URL: 'mongodb+srv://superCluster.d83jj.mongodb.net/superData'
+  MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
+  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}      
+            
+jobs:
+    unit-testing:
+        name: Unit Testing
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+              
+            - name: Setup Node JS Version - 18
+              uses: actions/setup-node@v4
+              with:
+                node-version: 18
+                
+            - name: Install Dependencies
+              run: npm install
+              
+            - name: Unit Testing
+              run: npm test 
+              
+
+    env_variable_job:
+      runs-on: ubuntu-latest
+      steps:
+        - run: |
+            echo "Environment Variable: ${{ vars.MONGO_USERNAME }}"
+            echo "Secret Environment Variable: ${{ secrets.MONGO_PASSWORD }}"        

@@ -1,0 +1,6 @@
+name: Display Environment Variables
+on: workflow_dispath
+jobs:
+    env_variable_job:
+        - run: echo "Environment Variable: ${{ vars.MONGO_USERNAME }}"
+        - run: echo "Secret Environment Variable: ${{ secrets.MONGO_PASSWORD }}"
